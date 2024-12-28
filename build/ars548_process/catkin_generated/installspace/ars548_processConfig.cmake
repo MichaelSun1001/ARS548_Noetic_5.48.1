@@ -67,14 +67,14 @@ set(ars548_process_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
-  set(ars548_process_SOURCE_PREFIX /home/sax/ARS548_noetic/src/ars548_process)
-  set(ars548_process_DEVEL_PREFIX /home/sax/ARS548_noetic/devel)
+  set(ars548_process_SOURCE_PREFIX /home/sax/ARS548_Noetic/src/ars548_process)
+  set(ars548_process_DEVEL_PREFIX /home/sax/ARS548_Noetic/devel)
   set(ars548_process_INSTALL_PREFIX "")
   set(ars548_process_PREFIX ${ars548_process_DEVEL_PREFIX})
 else()
   set(ars548_process_SOURCE_PREFIX "")
   set(ars548_process_DEVEL_PREFIX "")
-  set(ars548_process_INSTALL_PREFIX /home/sax/ARS548_noetic/install)
+  set(ars548_process_INSTALL_PREFIX /home/sax/ARS548_Noetic/install)
   set(ars548_process_PREFIX ${ars548_process_INSTALL_PREFIX})
 endif()
 
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/sax/ARS548_noetic/install/lib;/opt/ros/noetic/lib)
+    foreach(path /home/sax/ARS548_Noetic/install/lib;/home/sax/ARS548_Noetic/devel/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

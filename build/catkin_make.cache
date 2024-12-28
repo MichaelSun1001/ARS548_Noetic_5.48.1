@@ -1,2 +1,2 @@
 ars548_msg:ars548_process
--DCATKIN_DEVEL_PREFIX=/home/sax/ARS548_noetic/devel -DCMAKE_INSTALL_PREFIX=/home/sax/ARS548_noetic/install -G Unix Makefiles
+-DCATKIN_DEVEL_PREFIX=/home/sax/ARS548_Noetic/devel -DCMAKE_INSTALL_PREFIX=/home/sax/ARS548_Noetic/install -G Unix Makefiles

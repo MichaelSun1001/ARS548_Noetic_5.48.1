@@ -3,7 +3,7 @@
 3、雷达IP：10.13.1.113
 
 
-rm build/ devel/ -fr
+rm build/ devel/ -fr src/CMakeLists.txt
 
 catkin_make --pkg ars548_msg
 
@@ -15,6 +15,8 @@ source devel/setup.bash
 roslaunch ars548_process ars548_process.launch
 
 rosbag record -a
+
+rosbag record /imu /raw_gnss /gps/fix /ars548_process/point_cloud /ars548_process/point_cloud2 /hik_cam_node/hik_camera/compressed /rtsp_camera_relay/image/compressed
 
 rosbag play xxx.bag -r 10
 

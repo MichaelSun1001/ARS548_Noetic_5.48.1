@@ -67,14 +67,14 @@ set(ars548_msg_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("TRUE" STREQUAL "TRUE")
-  set(ars548_msg_SOURCE_PREFIX /home/sax/ARS548_noetic/src/ars548_msg)
-  set(ars548_msg_DEVEL_PREFIX /home/sax/ARS548_noetic/devel)
+  set(ars548_msg_SOURCE_PREFIX /home/sax/ARS548_Noetic/src/ars548_msg)
+  set(ars548_msg_DEVEL_PREFIX /home/sax/ARS548_Noetic/devel)
   set(ars548_msg_INSTALL_PREFIX "")
   set(ars548_msg_PREFIX ${ars548_msg_DEVEL_PREFIX})
 else()
   set(ars548_msg_SOURCE_PREFIX "")
   set(ars548_msg_DEVEL_PREFIX "")
-  set(ars548_msg_INSTALL_PREFIX /home/sax/ARS548_noetic/install)
+  set(ars548_msg_INSTALL_PREFIX /home/sax/ARS548_Noetic/install)
   set(ars548_msg_PREFIX ${ars548_msg_INSTALL_PREFIX})
 endif()
 
@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(ars548_msg_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT "/home/sax/ARS548_noetic/devel/include;/home/sax/ARS548_noetic/src/ars548_msg/include " STREQUAL " ")
+if(NOT "/home/sax/ARS548_Noetic/devel/include;/home/sax/ARS548_Noetic/src/ars548_msg/include " STREQUAL " ")
   set(ars548_msg_INCLUDE_DIRS "")
-  set(_include_dirs "/home/sax/ARS548_noetic/devel/include;/home/sax/ARS548_noetic/src/ars548_msg/include")
+  set(_include_dirs "/home/sax/ARS548_Noetic/devel/include;/home/sax/ARS548_Noetic/src/ars548_msg/include")
   if(NOT " " STREQUAL " ")
     set(_report "Check the issue tracker '' and consider creating a ticket if the problem has not been reported yet.")
   elseif(NOT " " STREQUAL " ")
@@ -110,7 +110,7 @@ if(NOT "/home/sax/ARS548_noetic/devel/include;/home/sax/ARS548_noetic/src/ars548
         message(FATAL_ERROR "Project 'ars548_msg' specifies '${idir}' as an include dir, which is not found.  It does not exist in '${include}'.  ${_report}")
       endif()
     else()
-      message(FATAL_ERROR "Project 'ars548_msg' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/sax/ARS548_noetic/src/ars548_msg/${idir}'.  ${_report}")
+      message(FATAL_ERROR "Project 'ars548_msg' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/sax/ARS548_Noetic/src/ars548_msg/${idir}'.  ${_report}")
     endif()
     _list_append_unique(ars548_msg_INCLUDE_DIRS ${include})
   endforeach()
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/sax/ARS548_noetic/devel/lib;/opt/ros/noetic/lib)
+    foreach(path /home/sax/ARS548_Noetic/devel/lib;/home/sax/ARS548_Noetic/devel/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

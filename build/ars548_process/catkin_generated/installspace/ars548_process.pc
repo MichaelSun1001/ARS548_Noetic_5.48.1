@@ -1,4 +1,4 @@
-prefix=/home/sax/ARS548_noetic/install
+prefix=/home/sax/ARS548_Noetic/install
 
 Name: ars548_process
 Description: Description of ars548_process

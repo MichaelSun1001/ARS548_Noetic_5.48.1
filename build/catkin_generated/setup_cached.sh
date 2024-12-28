@@ -7,8 +7,6 @@
 # new environment variables
 
 # modified environment variables
-export CMAKE_PREFIX_PATH="/home/sax/ARS548_noetic/devel:$CMAKE_PREFIX_PATH"
-export PATH='/opt/ros/noetic/bin:/home/sax/cmake/bin:/home/sax/.local/bin:/home/sax/cmake/bin:/home/sax/anaconda3/condabin:/home/sax/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'
-export PWD='/home/sax/ARS548_noetic/build'
-export ROSLISP_PACKAGE_DIRECTORIES='/home/sax/ARS548_noetic/devel/share/common-lisp'
-export ROS_PACKAGE_PATH="/home/sax/ARS548_noetic/src:$ROS_PACKAGE_PATH"
+export PKG_CONFIG_PATH='/opt/ros/noetic/lib/pkgconfig:/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig'
+export PWD='/home/sax/ARS548_Noetic/build'
+export ROS_PACKAGE_PATH='/home/sax/ARS548_Noetic/src:/opt/ros/noetic/share'

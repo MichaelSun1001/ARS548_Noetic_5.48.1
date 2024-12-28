@@ -1,8 +1,8 @@
-prefix=/home/sax/ARS548_noetic/devel
+prefix=/home/sax/ARS548_Noetic/devel
 
 Name: ars548_process
 Description: Description of ars548_process
 Version: 0.0.0
-Cflags: -I/home/sax/ARS548_noetic/src/ars548_process/include
+Cflags: -I/home/sax/ARS548_Noetic/src/ars548_process/include
 Libs: -L${prefix}/lib 
 Requires: roscpp std_msgs ars548_msg sensor_msgs geometry_msgs
