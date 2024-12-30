@@ -1,6 +1,6 @@
 # CMake generated Testfile for 
-# Source directory: /home/sax/ARS548_Noetic/src
-# Build directory: /home/sax/ARS548_Noetic/build
+# Source directory: /home/sax/ARS548_Noetic_5.48.1/src
+# Build directory: /home/sax/ARS548_Noetic_5.48.1/build
 # 
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.

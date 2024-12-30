@@ -4,5 +4,5 @@ PROJECT_PKG_CONFIG_INCLUDE_DIRS = "${prefix}/include".split(';') if "${prefix}/i
 PROJECT_CATKIN_DEPENDS = "roscpp;std_msgs;ars548_msg;sensor_msgs;geometry_msgs".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "".split(';') if "" != "" else []
 PROJECT_NAME = "ars548_process"
-PROJECT_SPACE_DIR = "/home/sax/ARS548_Noetic/install"
+PROJECT_SPACE_DIR = "/home/sax/ARS548_Noetic_5.48.1/install"
 PROJECT_VERSION = "0.0.0"

@@ -113,95 +113,80 @@ void detectionReceive_sax(const ars548_msg::DetectionList &msg)
     ROS_INFO("cl2run");
     uint size = msg.detection_array.size();
 
-    // sensor_msgs::convertPointCloudToPointCloud2();
-
+    // 静态消息以在调用之间保留数据
     static sensor_msgs::PointCloud2 cloud_msg2;
     static sensor_msgs::PointCloud cloud_msg;
 
+    // 设置头部信息
     cloud_msg2.header.frame_id = "radar";
-    cloud_msg2.header.stamp = msg.detection_array[0].header.stamp;
+    if (size > 0)
+    {
+        cloud_msg2.header.stamp = msg.detection_array[0].header.stamp;
+    }
 
     cloud_msg.header.frame_id = "radar";
-    cloud_msg.header.stamp = msg.detection_array[0].header.stamp;
+    if (size > 0)
+    {
+        cloud_msg.header.stamp = msg.detection_array[0].header.stamp;
+    }
 
-    // 设置 PointCloud 的点和通道
+    // 配置 PointCloud 消息
     cloud_msg.points.resize(size);
-    cloud_msg.channels.resize(6);
+    cloud_msg.channels.resize(2); // 仅保留 intensity 和 doppler
+
+    // 配置 intensity 通道
     cloud_msg.channels[0].name = "intensity";
     cloud_msg.channels[0].values.resize(size);
+
+    // 配置 doppler 通道
     cloud_msg.channels[1].name = "doppler";
     cloud_msg.channels[1].values.resize(size);
-    cloud_msg.channels[2].name = "doppler_std";
-    cloud_msg.channels[2].values.resize(size);
-    cloud_msg.channels[3].name = "invalidflags";
-    cloud_msg.channels[3].values.resize(size);
-    cloud_msg.channels[4].name = "probability";
-    cloud_msg.channels[4].values.resize(size);
-    cloud_msg.channels[5].name = "classification";
-    cloud_msg.channels[5].values.resize(size);
 
-    // 定义PointCloud2消息的字段
+    // 定义 PointCloud2 消息的字段
     sensor_msgs::PointCloud2Modifier modifier(cloud_msg2);
 
-    // 设置PointCloud2消息的宽度和高度
+    // 设置 PointCloud2 消息的宽度和高度
     cloud_msg2.width = size;
     cloud_msg2.height = 1;
+    cloud_msg2.is_dense = false;
 
-    modifier.setPointCloud2Fields(9, "x", 1, sensor_msgs::PointField::FLOAT32,
+    // 设置 PointCloud2 的字段，仅包含 x, y, z, intensity, doppler
+    modifier.setPointCloud2Fields(5,
+                                  "x", 1, sensor_msgs::PointField::FLOAT32,
                                   "y", 1, sensor_msgs::PointField::FLOAT32,
                                   "z", 1, sensor_msgs::PointField::FLOAT32,
                                   "intensity", 1, sensor_msgs::PointField::FLOAT32,
-                                  "doppler", 1, sensor_msgs::PointField::FLOAT32,
-                                  "doppler_std", 1, sensor_msgs::PointField::FLOAT32,
-                                  "invalidflags", 1, sensor_msgs::PointField::FLOAT32,
-                                  "probability", 1, sensor_msgs::PointField::FLOAT32,
-                                  "classification", 1, sensor_msgs::PointField::FLOAT32);
+                                  "doppler", 1, sensor_msgs::PointField::FLOAT32);
 
-    // 获取字段的偏移量
+    // 获取字段的迭代器
     sensor_msgs::PointCloud2Iterator<float> iter_x(cloud_msg2, "x");
     sensor_msgs::PointCloud2Iterator<float> iter_y(cloud_msg2, "y");
     sensor_msgs::PointCloud2Iterator<float> iter_z(cloud_msg2, "z");
-    sensor_msgs::PointCloud2Iterator<float> iter_rcs(cloud_msg2, "intensity");
+    sensor_msgs::PointCloud2Iterator<float> iter_intensity(cloud_msg2, "intensity");
     sensor_msgs::PointCloud2Iterator<float> iter_doppler(cloud_msg2, "doppler");
-    sensor_msgs::PointCloud2Iterator<float> iter_doppler_std(cloud_msg2, "doppler_std");
-    sensor_msgs::PointCloud2Iterator<float> iter_invalidflags(cloud_msg2, "invalidflags");
-    sensor_msgs::PointCloud2Iterator<float> iter_classification(cloud_msg2, "probability");
-    sensor_msgs::PointCloud2Iterator<float> iter_probability(cloud_msg2, "classification");
 
-    // 填充PointCloud和PointCloud2消息的数据
+    // 填充 PointCloud 和 PointCloud2 消息的数据
     for (uint i = 0; i < size; i++)
     {
-        // 填充PointCloud
+        // 填充 PointCloud
         cloud_msg.points[i].x = msg.detection_array[i].f_x;
         cloud_msg.points[i].y = msg.detection_array[i].f_y;
         cloud_msg.points[i].z = msg.detection_array[i].f_z;
-        cloud_msg.channels[0].values[i] = msg.detection_array[i].s_RCS;
-        cloud_msg.channels[1].values[i] = msg.detection_array[i].f_RangeRate;
-        cloud_msg.channels[2].values[i] = msg.detection_array[i].f_RangeRateSTD;
-        cloud_msg.channels[3].values[i] = msg.detection_array[i].u_InvalidFlags;
-        cloud_msg.channels[4].values[i] = msg.detection_array[i].u_PositivePredictiveValue;
-        cloud_msg.channels[5].values[i] = msg.detection_array[i].u_Classification;
+        cloud_msg.channels[0].values[i] = msg.detection_array[i].s_RCS;       // intensity
+        cloud_msg.channels[1].values[i] = msg.detection_array[i].f_RangeRate; // doppler
 
-        // 填充PointCloud2
+        // 填充 PointCloud2
         *iter_x = msg.detection_array[i].f_x;
         *iter_y = msg.detection_array[i].f_y;
         *iter_z = msg.detection_array[i].f_z;
-        *iter_rcs = msg.detection_array[i].s_RCS;
-        *iter_doppler = msg.detection_array[i].f_RangeRate;
-        *iter_doppler_std = msg.detection_array[i].f_RangeRateSTD;
-        *iter_invalidflags = msg.detection_array[i].u_InvalidFlags;
-        *iter_probability = msg.detection_array[i].u_PositivePredictiveValue;
-        *iter_classification = msg.detection_array[i].u_Classification;
+        *iter_intensity = msg.detection_array[i].s_RCS;     // intensity
+        *iter_doppler = msg.detection_array[i].f_RangeRate; // doppler
 
         ++iter_x;
         ++iter_y;
         ++iter_z;
-        ++iter_rcs;
+        ++iter_intensity;
         ++iter_doppler;
-        ++iter_doppler_std;
-        ++iter_invalidflags;
-        ++iter_probability;
-        ++iter_classification;
     }
 
     // 发布点云消息

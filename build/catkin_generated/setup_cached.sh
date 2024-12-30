@@ -7,6 +7,10 @@
 # new environment variables
 
 # modified environment variables
-export PKG_CONFIG_PATH='/opt/ros/noetic/lib/pkgconfig:/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig'
-export PWD='/home/sax/ARS548_Noetic/build'
-export ROS_PACKAGE_PATH='/home/sax/ARS548_Noetic/src:/opt/ros/noetic/share'
+export CMAKE_PREFIX_PATH="/home/sax/ARS548_Noetic_5.48.1/devel:$CMAKE_PREFIX_PATH"
+export LD_LIBRARY_PATH="/home/sax/ARS548_Noetic_5.48.1/devel/lib:$LD_LIBRARY_PATH"
+export PATH='/opt/ros/noetic/bin:/home/sax/cmake/bin:/home/sax/anaconda3/bin:/home/sax/.local/bin:/home/sax/cmake/bin:/home/sax/anaconda3/bin:/home/sax/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'
+export PWD='/home/sax/ARS548_Noetic_5.48.1/build'
+export PYTHONPATH="/home/sax/ARS548_Noetic_5.48.1/devel/lib/python3/dist-packages:$PYTHONPATH"
+export ROSLISP_PACKAGE_DIRECTORIES='/home/sax/ARS548_Noetic_5.48.1/devel/share/common-lisp'
+export ROS_PACKAGE_PATH="/home/sax/ARS548_Noetic_5.48.1/src:$ROS_PACKAGE_PATH"
