@@ -9,7 +9,7 @@ rm build/ devel/ -fr src/CMakeLists.txt
 
 catkin_make --pkg ars548_msg
 
-catkin_make -j8
+catkin_make -j15
 
 
 source devel/setup.bash
