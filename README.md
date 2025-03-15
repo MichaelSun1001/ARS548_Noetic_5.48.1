@@ -4,9 +4,6 @@
 2、软件使用时，要关掉防火墙。
 3、雷达IP：10.13.1.113
 
-
-rm build/ devel/ -fr src/CMakeLists.txt
-
 catkin_make --pkg ars548_msg
 
 catkin_make -j15
