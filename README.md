@@ -1,22 +1,27 @@
-这个驱动是ARS548 固件5.48.1版本的，此版本雷达表面没有丝印。
+# **车载以太网转换器设置**
+请将拨码开关设置为“SLAVE”模式
+
+# **TP-LINK交换机（TL-SG2008D）设置**
+1、交换机默认IP：10.18.18.251，修改电脑为同一网段，在浏览器中输入交换机IP进行登录，首次登录会进行用户名和密码设置，建议设置为用户名：admin 密码：12345
+2、登录后，设置交换机的相关配置，请查看doc文件夹中的对应截图
+3、完成后，记得点击“保存配置”并断电重启交换机。
+
+# **单个雷达**
 
 1、自己电脑的IP要配置为10.13.1.166，默认网关10.13.1.1，子网掩码255.255.255.0。
 2、软件使用时，要关掉防火墙。
 3、雷达IP：10.13.1.113
 
+# **编译**
+
+rm build/ devel/ -fr
+
 catkin_make --pkg ars548_msg
 
-catkin_make -j15
+catkin_make -j20
 
+# **运行**
 
 source devel/setup.bash
 
 roslaunch ars548_process ars548_process.launch
-
-rosbag record -a
-
-rosbag record /imu /raw_gnss /gps/fix /ars548_process/point_cloud /ars548_process/point_cloud2 /hik_cam_node/hik_camera/compressed /rtsp_camera_relay/image/compressed
-
-rosbag play xxx.bag -r 10
-
-rostopic echo -b xxx.bag -p /xxx >xxx.cxv
